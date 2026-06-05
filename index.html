@@ -276,6 +276,69 @@ canvas{
   padding:4px 8px;
   background:#ddd;
 }
+  .window{
+  touch-action:none;
+}
+
+@media (max-width: 768px){
+  body{
+    overflow:auto;
+  }
+
+  .desktop{
+    min-height:100vh;
+    height:auto;
+    padding-bottom:60px;
+  }
+
+  .window{
+    max-width:92vw;
+  }
+
+  #mirror{
+    left:15px;
+    top:70px;
+    width:92vw;
+  }
+
+  #cd{
+    left:20px;
+    top:520px;
+    width:88vw;
+  }
+
+  #about{
+    left:30px;
+    top:700px;
+    right:auto;
+    width:85vw;
+  }
+
+  #folder,
+  #paint,
+  #likes,
+  #shoplinks{
+    left:15px;
+    top:110px;
+    width:92vw;
+  }
+
+  #paint{
+    width:96vw;
+  }
+
+  .paint-main{
+    overflow:auto;
+  }
+
+  .paint-canvas-wrap{
+    width:calc(96vw - 100px);
+  }
+
+  .taskbar{
+    position:fixed;
+  }
+}
 </style>
 </head>
 
@@ -441,35 +504,69 @@ setInterval(()=>{
     new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
 },1000);
 
+// DRAGGABLE WINDOWS — DESKTOP + MOBILE FIX
+
 let activeWindow = null;
 let offsetX = 0;
 let offsetY = 0;
 
+function getPoint(e){
+  if(e.touches && e.touches.length > 0){
+    return {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY
+    };
+  }
+
+  return {
+    x: e.clientX,
+    y: e.clientY
+  };
+}
+
 document.querySelectorAll(".window").forEach(win => {
   const bar = win.querySelector(".titlebar");
 
-  bar.addEventListener("mousedown", e => {
+  function startDrag(e){
+    const point = getPoint(e);
+
     activeWindow = win;
-    offsetX = e.clientX - win.offsetLeft;
-    offsetY = e.clientY - win.offsetTop;
+
+    offsetX = point.x - win.offsetLeft;
+    offsetY = point.y - win.offsetTop;
+
     win.style.zIndex = Date.now();
+
     e.preventDefault();
-  });
+  }
+
+  bar.addEventListener("mousedown", startDrag);
+  bar.addEventListener("touchstart", startDrag, {passive:false});
 
   win.querySelector(".close").addEventListener("click", () => {
     win.style.display = "none";
   });
 });
 
-document.addEventListener("mousemove", e => {
+function moveDrag(e){
   if(!activeWindow) return;
-  activeWindow.style.left = `${e.clientX - offsetX}px`;
-  activeWindow.style.top = `${e.clientY - offsetY}px`;
-});
+
+  const point = getPoint(e);
+
+  activeWindow.style.left = `${point.x - offsetX}px`;
+  activeWindow.style.top = `${point.y - offsetY}px`;
+
+  e.preventDefault();
+}
+
+document.addEventListener("mousemove", moveDrag);
+document.addEventListener("touchmove", moveDrag, {passive:false});
 
 document.addEventListener("mouseup", () => activeWindow = null);
-window.addEventListener("blur", () => activeWindow = null);
+document.addEventListener("touchend", () => activeWindow = null);
+document.addEventListener("touchcancel", () => activeWindow = null);
 
+window.addEventListener("blur", () => activeWindow = null);
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
