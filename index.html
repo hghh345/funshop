@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FUNFUNFUNSHOP</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:url("https://wallpapercave.com/wp/wp2754867.jpg") center/cover fixed;
+  overflow:hidden;
+  color:#111;
+  cursor:crosshair;
+}
+
+.desktop{
+  height:100vh;
+  padding:18px;
+  position:relative;
+}
+
+.icon{
+  width:82px;
+  text-align:center;
+  color:white;
+  text-shadow:1px 1px #000;
+  margin-bottom:18px;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.icon img{
+  width:46px;
+  height:46px;
+  display:block;
+  margin:0 auto 4px;
+}
+
+.window{
+  position:absolute;
+  background:#c0c0c0;
+  border:2px outset #fff;
+  box-shadow:3px 3px rgba(0,0,0,.35);
+  display:none;
+  overflow:hidden;
+}
+
+.titlebar{
+  color:white;
+  padding:4px 6px;
+  font-weight:bold;
+  font-size:13px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:move;
+  user-select:none;
+  background:linear-gradient(90deg,#001a9e,#2b8bff);
+}
+
+.pink .titlebar{background:linear-gradient(90deg,#c4007a,#ff7ad9)}
+.green .titlebar{background:linear-gradient(90deg,#007f3f,#73df9b)}
+.purple .titlebar{background:linear-gradient(90deg,#4b0082,#b388ff)}
+.orange .titlebar{background:linear-gradient(90deg,#b85c00,#ffb347)}
+
+.close{
+  background:#c0c0c0;
+  color:#000;
+  border:2px outset #fff;
+  padding:0 6px;
+  cursor:pointer;
+}
+
+.content{
+  background:white;
+  border:2px inset #999;
+  margin:4px;
+  padding:10px;
+  overflow:auto;
+}
+
+button{
+  font-family:Tahoma;
+  border:2px outset #fff;
+  background:#ece9d8;
+  padding:5px 8px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+button:active{border:2px inset #fff}
+
+#mirror{left:105px;top:55px;width:350px}
+#cd{left:500px;top:70px;width:360px}
+#about{right:55px;top:45px;width:305px;background:#fff2a8;transform:rotate(1.5deg)}
+#folder{left:110px;bottom:75px;width:390px}
+#paint{left:430px;top:145px;width:610px}
+#likes{right:65px;top:300px;width:410px}
+#shoplinks{left:80px;bottom:75px;width:320px}
+
+.mirror-img{
+  width:100%;
+  height:270px;
+  object-fit:cover;
+  background:#ddd;
+  border:2px inset #999;
+}
+
+.price{
+  font-size:22px;
+  color:#0054e3;
+  font-weight:bold;
+}
+
+.note-line{
+  border-bottom:1px solid #111;
+  padding:5px 0;
+  font-family:"Comic Sans MS",cursive;
+}
+
+.folder-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  text-align:center;
+}
+
+.folder-item{
+  cursor:pointer;
+  padding:8px;
+}
+
+.folder-item:hover{
+  background:#dbe9ff;
+  outline:1px dotted #000;
+}
+
+.folder-item img{
+  width:48px;
+  display:block;
+  margin:0 auto 6px;
+}
+
+.paint-content{padding:0;overflow:hidden}
+
+.paint-menu{
+  background:#ece9d8;
+  border-bottom:2px solid #aaa;
+  padding:4px 7px;
+  font-size:12px;
+  white-space:nowrap;
+}
+
+.paint-main{
+  display:flex;
+  gap:6px;
+  padding:6px;
+  background:#c0c0c0;
+}
+
+.paint-toolbar{
+  width:72px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3px;
+  flex-shrink:0;
+}
+
+.paint-toolbar button{
+  width:34px;
+  height:28px;
+  padding:0;
+  font-size:13px;
+}
+
+.paint-canvas-wrap{
+  width:505px;
+  height:315px;
+  overflow:auto;
+  background:#808080;
+  border:2px inset #999;
+  flex-shrink:0;
+}
+
+canvas{
+  display:block;
+  width:500px;
+  height:310px;
+  background:white;
+  cursor:crosshair;
+}
+
+.paint-bottom{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:6px;
+  background:#ece9d8;
+  border-top:2px solid #aaa;
+}
+
+.palette{
+  display:grid;
+  grid-template-columns:repeat(14,18px);
+  gap:2px;
+}
+
+.swatch{
+  width:18px;
+  height:18px;
+  border:1px solid #333;
+  cursor:pointer;
+}
+
+.columns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  font-size:13px;
+}
+
+.cd-row{
+  display:grid;
+  grid-template-columns:80px 1fr;
+  gap:8px;
+  align-items:center;
+}
+
+.album{
+  width:80px;
+  height:80px;
+  object-fit:cover;
+  background:#ddd;
+  border:2px inset #999;
+}
+
+.track{
+  border:2px inset #999;
+  padding:4px;
+  background:white;
+  margin-bottom:5px;
+  font-size:12px;
+}
+
+.taskbar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:34px;
+  background:#c0c0c0;
+  border-top:2px solid #fff;
+  display:flex;
+  align-items:center;
+  padding:3px;
+  gap:6px;
+  z-index:9999;
+}
+
+.start{font-weight:bold}
+
+.task{
+  border:2px outset #fff;
+  background:#ddd;
+  padding:5px 12px;
+  font-size:12px;
+}
+
+.clock{
+  margin-left:auto;
+  border:2px inset #fff;
+  padding:4px 8px;
+  background:#ddd;
+}
+</style>
+</head>
+
+<body>
+
+<div class="desktop">
+
+  <div class="icon" onclick="openWin('folder')">
+    <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png">
+    My Documents
+  </div>
+
+  <div class="icon" onclick="openWin('paint')">
+    <img src="https://win98icons.alexmeub.com/icons/png/paint_file-0.png">
+    Paint
+  </div>
+
+  <div class="icon" onclick="openWin('shoplinks')">
+    <img src="https://win98icons.alexmeub.com/icons/png/shopping_cart-0.png">
+    Shop
+  </div>
+
+  <div class="window pink" id="mirror">
+    <div class="titlebar">MS Paint Mirror.exe <span class="close">x</span></div>
+    <div class="content">
+      <img class="mirror-img" src="https://placehold.co/600x600/ffb7e9/111?text=MS+PAINT+MIRROR">
+      <h2>MS Paint Mirror</h2>
+      <p>A shatterproof 40 × 60 cm mirror inspired by MS Paint, desktop chaos, and internet girlhood.</p>
+      <div class="price">€45</div><br>
+      <button onclick="window.location.href='https://buy.stripe.com/YOUR_MIRROR_LINK'">Buy Mirror</button>
+    </div>
+  </div>
+
+  <div class="window purple" id="cd">
+    <div class="titlebar">CD Player <span class="close">x</span></div>
+    <div class="content">
+      <div class="cd-row">
+        <img class="album" src="https://placehold.co/150x150/cdb4db/111?text=MIXES">
+        <div>
+          <div class="track">Artist: Lil Bukkake</div>
+          <div class="track" id="currentTrack">Track: choose a mix</div>
+          <button onclick="openMix('https://soundcloud.com/YOUR-LINK-1','Mix 1')">Mix 1</button>
+          <button onclick="openMix('https://soundcloud.com/YOUR-LINK-2','Mix 2')">Mix 2</button>
+          <button onclick="openMix('https://soundcloud.com/YOUR-LINK-3','Mix 3')">Mix 3</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="window orange" id="about">
+    <div class="titlebar">Sticky Note.txt <span class="close">x</span></div>
+    <div class="content" style="background:#fff2a8;">
+      <div class="note-line">□ FUNFUNFUNSHOP</div>
+      <div class="note-line">□ handmade-ish internet objects</div>
+      <div class="note-line">□ Lisbon based</div>
+      <div class="note-line">□ MS Paint romantic</div>
+      <div class="note-line">□ made to order</div>
+      <div class="note-line">□ @funfunfun.world</div>
+    </div>
+  </div>
+
+  <div class="window green" id="folder">
+    <div class="titlebar">My Documents <span class="close">x</span></div>
+    <div class="content">
+      <div class="folder-grid">
+        <div class="folder-item" onclick="openWin('paint')">
+          <img src="https://win98icons.alexmeub.com/icons/png/paint_file-0.png">
+          MS Paint
+        </div>
+        <div class="folder-item" onclick="openWin('likes')">
+          <img src="https://win98icons.alexmeub.com/icons/png/notepad_file-2.png">
+          Likes.txt
+        </div>
+        <div class="folder-item" onclick="openWin('shoplinks')">
+          <img src="https://win98icons.alexmeub.com/icons/png/directory_closed-4.png">
+          Shop Files
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="window" id="paint">
+    <div class="titlebar">untitled - Paint <span class="close">x</span></div>
+    <div class="content paint-content">
+      <div class="paint-menu">File&nbsp;&nbsp;Edit&nbsp;&nbsp;View&nbsp;&nbsp;Image&nbsp;&nbsp;Colors&nbsp;&nbsp;Help</div>
+      <div class="paint-main">
+        <div class="paint-toolbar">
+          <button onclick="setTool('brush')">✏️</button>
+          <button onclick="setTool('eraser')">▭</button>
+          <button onclick="setTool('line')">╱</button>
+          <button onclick="setTool('rect')">□</button>
+          <button onclick="setTool('circle')">○</button>
+          <button onclick="setTool('text')">A</button>
+          <button onclick="clearCanvas()">CLR</button>
+          <button onclick="saveDrawing()">SAV</button>
+        </div>
+        <div class="paint-canvas-wrap">
+          <canvas id="canvas" width="500" height="310"></canvas>
+        </div>
+      </div>
+      <div class="paint-bottom">
+        <input type="range" id="size" min="1" max="35" value="5">
+        <div class="palette" id="palette"></div>
+        <input type="color" id="color" value="#ff3bbd">
+      </div>
+    </div>
+  </div>
+
+  <div class="window green" id="likes">
+    <div class="titlebar">Likes and Dislikes <span class="close">x</span></div>
+    <div class="content">
+      <div class="columns">
+        <div>
+          <h3 style="color:green;">LIKES</h3>
+          <p>— desktop clutter<br>— shatterproof glam<br>— tiny details<br>— customization<br>— objects with lore</p>
+        </div>
+        <div>
+          <h3 style="color:#b00000;">DISLIKES</h3>
+          <p>— boring mirrors<br>— dropshipping vibes<br>— minimalism<br>— fake scarcity<br>— no personality</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="window pink" id="shoplinks">
+    <div class="titlebar">Shop Files <span class="close">x</span></div>
+    <div class="content">
+      <h3>Direct Stripe Links</h3>
+      <button onclick="window.location.href='https://buy.stripe.com/YOUR_MIRROR_LINK'">Mirror</button>
+      <button onclick="window.location.href='https://buy.stripe.com/YOUR_SHOE_LINK'">Shoes</button>
+      <button onclick="window.location.href='https://buy.stripe.com/YOUR_LIGHTER_LINK'">Lighters</button>
+      <button onclick="window.location.href='https://buy.stripe.com/YOUR_CUSTOM_LINK'">Customization</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="taskbar">
+  <button class="start" onclick="openWin('folder')">Start</button>
+  <button class="task" onclick="openWin('mirror')">Mirror</button>
+  <button class="task" onclick="openWin('cd')">CD Player</button>
+  <button class="task" onclick="openWin('about')">Note</button>
+  <div class="clock" id="clock"></div>
+</div>
+
+<script>
+function openWin(id){
+  const win = document.getElementById(id);
+  win.style.display = "block";
+  win.style.zIndex = Date.now();
+}
+
+function closeWin(id){
+  document.getElementById(id).style.display = "none";
+}
+
+openWin("mirror");
+openWin("cd");
+openWin("about");
+
+setInterval(()=>{
+  document.getElementById("clock").innerText =
+    new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+},1000);
+
+let activeWindow = null;
+let offsetX = 0;
+let offsetY = 0;
+
+document.querySelectorAll(".window").forEach(win => {
+  const bar = win.querySelector(".titlebar");
+
+  bar.addEventListener("mousedown", e => {
+    activeWindow = win;
+    offsetX = e.clientX - win.offsetLeft;
+    offsetY = e.clientY - win.offsetTop;
+    win.style.zIndex = Date.now();
+    e.preventDefault();
+  });
+
+  win.querySelector(".close").addEventListener("click", () => {
+    win.style.display = "none";
+  });
+});
+
+document.addEventListener("mousemove", e => {
+  if(!activeWindow) return;
+  activeWindow.style.left = `${e.clientX - offsetX}px`;
+  activeWindow.style.top = `${e.clientY - offsetY}px`;
+});
+
+document.addEventListener("mouseup", () => activeWindow = null);
+window.addEventListener("blur", () => activeWindow = null);
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let painting = false;
+let tool = "brush";
+let startX = 0;
+let startY = 0;
+let snapshot = null;
+
+const colors = [
+  "#000000","#808080","#800000","#ff0000","#808000","#ffff00","#008000",
+  "#00ff00","#008080","#00ffff","#000080","#0000ff","#800080","#ff00ff",
+  "#ffffff","#c0c0c0","#ffb6c1","#ff69b4","#ffa500","#ffd700","#7fffd4",
+  "#baffc9","#bae1ff","#cdb4db","#ffc6ff","#fdffb6","#a0c4ff","#ffadad"
+];
+
+const palette = document.getElementById("palette");
+
+colors.forEach(color => {
+  const swatch = document.createElement("div");
+  swatch.className = "swatch";
+  swatch.style.background = color;
+  swatch.onclick = () => document.getElementById("color").value = color;
+  palette.appendChild(swatch);
+});
+
+function setTool(selectedTool){tool = selectedTool}
+
+canvas.addEventListener("mousedown", e => {
+  painting = true;
+  const rect = canvas.getBoundingClientRect();
+  startX = e.clientX - rect.left;
+  startY = e.clientY - rect.top;
+  snapshot = ctx.getImageData(0,0,canvas.width,canvas.height);
+
+  if(tool === "text"){
+    const text = prompt("Type your text:");
+    if(text){
+      ctx.fillStyle = document.getElementById("color").value;
+      ctx.font = "24px Tahoma";
+      ctx.fillText(text,startX,startY);
+    }
+    painting = false;
+  }
+});
+
+canvas.addEventListener("mouseup", () => {
+  painting = false;
+  ctx.beginPath();
+});
+
+canvas.addEventListener("mouseleave", () => {
+  painting = false;
+  ctx.beginPath();
+});
+
+canvas.addEventListener("mousemove", draw);
+
+function draw(e){
+  if(!painting) return;
+
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  ctx.lineWidth = document.getElementById("size").value;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = tool === "eraser" ? "#ffffff" : document.getElementById("color").value;
+
+  if(tool === "brush" || tool === "eraser"){
+    ctx.lineTo(x,y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x,y);
+  }
+
+  if(tool === "line" || tool === "rect" || tool === "circle"){
+    ctx.putImageData(snapshot,0,0);
+    ctx.beginPath();
+
+    if(tool === "line"){
+      ctx.moveTo(startX,startY);
+      ctx.lineTo(x,y);
+      ctx.stroke();
+    }
+
+    if(tool === "rect"){
+      ctx.strokeRect(startX,startY,x-startX,y-startY);
+    }
+
+    if(tool === "circle"){
+      const radius = Math.sqrt((x-startX)**2 + (y-startY)**2);
+      ctx.arc(startX,startY,radius,0,Math.PI*2);
+      ctx.stroke();
+    }
+  }
+}
+
+function clearCanvas(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+
+function saveDrawing(){
+  const link = document.createElement("a");
+  link.download = "funfunfun-drawing.png";
+  link.href = canvas.toDataURL();
+  link.click();
+}
+
+function openMix(url, title){
+  document.getElementById("currentTrack").innerText = "Track: " + title;
+  window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
