@@ -709,7 +709,7 @@ canvas {
   </div>
 </section>
 
-<section class="window donation-window" id="donationWin">
+<section class="window donation-window hidden" id="donationWin">
   <div class="window-titlebar">
     <span>donation-folder.txt</span>
     <div class="window-buttons">
@@ -726,7 +726,7 @@ canvas {
   </div>
 </section>
 
-<section class="window folder-window" id="folderWin">
+<section class="window folder-window hidden" id="folderWin">
   <div class="window-titlebar">
     <span>FUNFUNFUN Shop Files</span>
     <div class="window-buttons">
@@ -763,7 +763,7 @@ canvas {
   </div>
 </section>
 
-<section class="window shipping-window" id="shippingWin">
+<section class="window shipping-window hidden" id="shippingWin">
   <div class="window-titlebar">
     <span>shipping_info.doc</span>
     <div class="window-buttons">
@@ -836,6 +836,12 @@ function openWindow(id) {
   el.classList.remove("hidden");
   bringToFront(el);
   document.getElementById("startMenu").classList.add("hidden");
+
+  if (window.innerWidth <= 800) {
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  }
 }
 
 function closeWindow(event, id) {
