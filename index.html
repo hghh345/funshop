@@ -92,6 +92,20 @@ body{
 .content{
   padding:16px;
 }
+  .donation-window {
+  top: 1040px;
+  left: 60px;
+}
+
+.shipping-window {
+  top: 1040px;
+  left: 530px;
+}
+
+.donation-window a {
+  color: #ff32b1;
+  font-weight: bold;
+}
 
 /* HERO */
 
@@ -465,8 +479,59 @@ src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/YOUR-SOUNDCLO
 <img src="mirror2.jpg">
 <img src="mirror3.jpg">
 </div>
+<!-- DONATION WINDOW -->
 
-</div>
+<section class="window donation-window draggable">
+  <div class="titlebar">
+    <span>pride-donation.txt</span>
+    <div class="buttons">
+      <span>💖</span><span>🌈</span><span>x</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <h2>Donation</h2>
+
+    <p>
+      A portion of every MS Paint Mirror order will be donated to
+      <a href="https://www.theokraproject.com/" target="_blank">
+        The Okra Project
+      </a>, a Black trans-led collective supporting Black trans people.
+    </p>
+
+    <p>
+      Your mirror is cute. Your money is doing something cute too.
+    </p>
+  </div>
+</section>
+
+<!-- SHIPPING WINDOW -->
+
+<section class="window shipping-window draggable">
+  <div class="titlebar">
+    <span>shipping-info.txt</span>
+    <div class="buttons">
+      <span>📦</span><span>✈</span><span>x</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <h2>Shipping</h2>
+
+    <p>
+      Each mirror is made to order and ships from Lisbon, Portugal.
+    </p>
+
+    <p>
+      Shipping costs are calculated at checkout. Please allow a little extra
+      time for production before your mirror is packed and sent.
+    </p>
+
+    <p>
+      The mirror is shatterproof, but it will still be packed carefully for
+      safe delivery.
+    </p>
+  </div>
 </section>
 
 </div>
