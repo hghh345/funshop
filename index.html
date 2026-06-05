@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FUNFUNFUNSHOP</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>FUNFUNFUN.SHOP</title>
 
 <style>
 
@@ -13,535 +14,289 @@
 
 body{
   margin:0;
-  font-family:Tahoma,Arial,sans-serif;
-
+  overflow-x:hidden;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,0,200,.35), transparent 25%),
-    radial-gradient(circle at 80% 30%, rgba(0,255,255,.35), transparent 25%),
-    linear-gradient(135deg,#005bbb,#8bd3ff 45%,#ffb7e9);
+  linear-gradient(90deg,#ffd6f8 25%, transparent 25%) 0 0/60px 60px,
+  linear-gradient(#d7f8ff 25%, transparent 25%) 0 0/60px 60px,
+  #fffbf0;
 
-  height:100vh;
-  overflow:hidden;
-  color:#111;
+  font-family:"Comic Sans MS", sans-serif;
   cursor:crosshair;
 }
 
+/* TOP SCROLL */
+
+.top-marquee{
+  position:sticky;
+  top:0;
+  z-index:9999;
+  background:#000;
+  color:#fffb00;
+  border-bottom:4px solid #000;
+  overflow:hidden;
+  white-space:nowrap;
+  padding:10px 0;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.top-marquee span{
+  display:inline-block;
+  padding-left:100%;
+  animation:marquee 14s linear infinite;
+}
+
+@keyframes marquee{
+  from{transform:translateX(0);}
+  to{transform:translateX(-100%);}
+}
+
+/* DESKTOP */
+
 .desktop{
-  height:100vh;
   position:relative;
-  padding:18px;
+  min-height:100vh;
+  padding:30px;
 }
 
-.icon{
-  width:88px;
-  color:white;
-  text-align:center;
-  text-shadow:1px 1px 2px #000;
-  font-size:12px;
-  cursor:pointer;
-  margin-bottom:18px;
-}
-
-.icon img{
-  width:48px;
-  height:48px;
-  display:block;
-  margin:0 auto 5px;
-}
+/* WINDOWS */
 
 .window{
   position:absolute;
-  display:none;
-  background:#c0c0c0;
-  border:2px outset white;
-  box-shadow:5px 5px 0 rgba(0,0,0,.35);
-  overflow:hidden;
-  touch-action:none;
+  width:420px;
+  background:white;
+  border:4px solid #000;
+  box-shadow:8px 8px 0 #000;
 }
 
 .titlebar{
-  padding:4px 6px;
+  background:linear-gradient(90deg,#ff32b1,#00f0ff);
   color:white;
   font-weight:bold;
-  font-size:13px;
+  padding:8px 10px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   cursor:move;
-  user-select:none;
+  border-bottom:4px solid #000;
 }
 
-.blue .titlebar{
-  background:linear-gradient(90deg,#001a9e,#2b8bff);
-}
-
-.pink .titlebar{
-  background:linear-gradient(90deg,#b00070,#ff78d2);
-}
-
-.green .titlebar{
-  background:linear-gradient(90deg,#007f3f,#7cffb2);
-}
-
-.purple .titlebar{
-  background:linear-gradient(90deg,#3b0080,#b588ff);
-}
-
-.orange .titlebar{
-  background:linear-gradient(90deg,#b85c00,#ffb347);
-}
-
-.close{
-  background:#c0c0c0;
+.buttons span{
+  background:#fffb00;
   color:#000;
-  border:2px outset white;
-  padding:0 6px;
-  cursor:pointer;
+  border:2px solid #000;
+  padding:0 7px;
+  margin-left:5px;
 }
 
 .content{
-  margin:4px;
-  padding:10px;
-  background:white;
-  border:2px inset #888;
-  overflow:auto;
+  padding:16px;
 }
 
-button{
-  font-family:Tahoma,Arial,sans-serif;
-  background:#ece9d8;
-  border:2px outset white;
-  padding:6px 10px;
-  cursor:pointer;
+/* HERO */
+
+.hero{
+  top:80px;
+  left:30px;
+  z-index:3;
 }
 
-button:active{
-  border:2px inset white;
+h1{
+  font-size:72px;
+  line-height:.85;
+  margin:0 0 14px;
+  color:#ff32b1;
+  text-shadow:
+  4px 4px 0 #00f0ff,
+  8px 8px 0 #000;
 }
 
-#mirror{
-  left:100px;
-  top:52px;
-  width:390px;
-}
-
-#cd{
-  left:520px;
-  top:70px;
-  width:370px;
-}
-
-#note{
-  right:45px;
-  top:50px;
-  width:310px;
-  transform:rotate(1deg);
-}
-
-#folder{
-  left:90px;
-  bottom:75px;
-  width:420px;
-}
-
-#paint{
-  left:430px;
-  top:140px;
-  width:610px;
-}
-
-#shop{
-  right:75px;
-  top:330px;
-  width:350px;
-}
-
-#popup{
-  left:580px;
-  bottom:80px;
-  width:330px;
-}
-
-.hero-img{
-  width:100%;
-  height:285px;
-  object-fit:cover;
-  background:#ffd1ef;
-  border:2px inset #888;
+h2{
+  background:#fffb00;
+  border:3px solid #000;
+  display:inline-block;
+  padding:5px 10px;
+  margin-top:0;
 }
 
 .price{
-  font-size:26px;
-  color:#0054e3;
+  font-size:44px;
   font-weight:bold;
+  color:#0046ff;
 }
 
-.blink{
-  animation:blink 1s infinite;
-  color:#ff008c;
+.cta{
+  display:inline-block;
+  margin-top:14px;
+  background:#ff32b1;
+  color:white;
+  text-decoration:none;
+  border:4px solid #000;
+  padding:14px 22px;
+  font-size:22px;
   font-weight:bold;
+  box-shadow:5px 5px 0 #000;
 }
 
-@keyframes blink{
-  50%{
-    opacity:.25;
-  }
+.cta:hover{
+  transform:translate(3px,3px);
+  box-shadow:2px 2px 0 #000;
 }
 
-.note-line{
-  font-family:"Comic Sans MS",cursive;
-  border-bottom:1px solid #111;
-  padding:6px 0;
-  background:#fff2a8;
+/* DRAW APP */
+
+.paint-window{
+  top:120px;
+  left:500px;
+  z-index:4;
 }
 
-.folder-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:16px;
-  text-align:center;
-}
-
-.folder-item{
-  cursor:pointer;
-  padding:8px;
-  font-size:12px;
-}
-
-.folder-item:hover{
-  background:#dbe9ff;
-  outline:1px dotted #000;
-}
-
-.folder-item img{
-  width:48px;
-  display:block;
-  margin:0 auto 6px;
-}
-
-
-
-/* NEW CD PLAYER */
-
-.cd-row{
-  display:grid;
-  grid-template-columns:95px 1fr;
-  gap:10px;
-  align-items:center;
-}
-
-.album-cover{
-  width:95px;
-  height:95px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ff7ad9,
-      #8bd3ff 45%,
-      #fff2a8
-    );
-
-  border:2px inset #888;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
+.canvas-wrap{
   position:relative;
-
-  overflow:hidden;
-
-  box-shadow:
-    inset 0 0 20px rgba(255,255,255,.8),
-    0 0 10px rgba(255,255,255,.4);
-}
-
-.album-inner{
-  text-align:center;
-  font-family:"Comic Sans MS",cursive;
-  color:#111;
-  position:relative;
-  z-index:2;
-}
-
-.album-star{
-  font-size:18px;
-  animation:spinStar 4s linear infinite;
-}
-
-.album-title{
-  font-size:13px;
-  font-weight:bold;
-  line-height:1.05;
-}
-
-.album-cover::before{
-  content:"";
-  position:absolute;
-  inset:-40%;
-
-  background:
-    radial-gradient(
-      rgba(255,255,255,.65),
-      transparent 60%
-    );
-
-  animation:floatGlow 6s linear infinite;
-}
-
-@keyframes spinStar{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-@keyframes floatGlow{
-  0%{
-    transform:translateX(-20%) translateY(-10%);
-  }
-
-  50%{
-    transform:translateX(10%) translateY(10%);
-  }
-
-  100%{
-    transform:translateX(-20%) translateY(-10%);
-  }
-}
-
-.track{
-  background:white;
-  border:2px inset #888;
-  padding:5px;
-  margin-bottom:5px;
-  font-size:12px;
-}
-
-
-
-/* PAINT */
-
-.paint-content{
-  padding:0;
-  overflow:hidden;
-}
-
-.paint-menu{
-  background:#ece9d8;
-  border-bottom:2px solid #aaa;
-  padding:4px 7px;
-  font-size:12px;
-}
-
-.paint-main{
-  display:flex;
-  gap:6px;
-  padding:6px;
-  background:#c0c0c0;
-}
-
-.paint-toolbar{
-  width:72px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:3px;
-  flex-shrink:0;
-}
-
-.paint-toolbar button{
-  width:34px;
-  height:28px;
-  padding:0;
-  font-size:12px;
-}
-
-.paint-canvas-wrap{
-  width:505px;
-  height:315px;
-  overflow:auto;
-  background:#888;
-  border:2px inset #777;
-  flex-shrink:0;
 }
 
 canvas{
-  display:block;
-  width:500px;
-  height:310px;
+  width:100%;
+  height:420px;
+  border:4px solid #000;
   background:white;
-  cursor:crosshair;
+  touch-action:none;
 }
 
-.paint-bottom{
+.uploaded-image{
+  display:none;
+}
+
+.tools{
   display:flex;
-  gap:7px;
-  align-items:center;
-  padding:6px;
-  background:#ece9d8;
-  border-top:2px solid #aaa;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:12px;
 }
 
-.palette{
-  display:grid;
-  grid-template-columns:repeat(14,18px);
-  gap:2px;
-}
-
-.swatch{
-  width:18px;
-  height:18px;
-  border:1px solid #333;
-  cursor:pointer;
-}
-
-
-
-/* TASKBAR */
-
-.taskbar{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
+.color-btn{
+  width:36px;
   height:36px;
-  background:#c0c0c0;
-  border-top:2px solid white;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding:3px;
-  z-index:99999;
+  border:3px solid #000;
+  cursor:pointer;
+  box-shadow:3px 3px 0 #000;
 }
 
-.start{
+.tool-btn{
+  border:3px solid #000;
+  background:#fff;
+  padding:9px 12px;
+  font-family:inherit;
   font-weight:bold;
+  cursor:pointer;
+  box-shadow:3px 3px 0 #000;
 }
 
-.task{
-  font-size:12px;
-  padding:5px 12px;
+.tool-btn:hover,
+.color-btn:hover{
+  transform:translate(2px,2px);
+  box-shadow:1px 1px 0 #000;
 }
 
-.clock{
-  margin-left:auto;
-  background:#ddd;
-  border:2px inset white;
-  padding:5px 8px;
-  font-size:12px;
+/* MUSIC */
+
+.music-window{
+  top:650px;
+  left:60px;
 }
 
+.music{
+  background:#111;
+  color:white;
+}
 
+.music .titlebar{
+  background:linear-gradient(90deg,#6d00ff,#ff32b1);
+}
 
-/* SPARKLES */
+.cd{
+  width:130px;
+  height:130px;
+  margin:0 auto 20px;
+  border-radius:50%;
+  border:4px solid #000;
+  background:
+  radial-gradient(circle,#fff 0 12%,#000 13% 17%,transparent 18%),
+  conic-gradient(#ff32b1,#00f0ff,#fffb00,#ff32b1);
+  animation:spin 5s linear infinite;
+}
 
-.sparkle{
-  position:fixed;
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+iframe{
+  width:100%;
+  border:0;
+}
+
+/* GALLERY */
+
+.gallery-window{
+  top:670px;
+  left:530px;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+
+.gallery img{
+  width:100%;
+  border:4px solid #000;
+  box-shadow:4px 4px 0 #000;
+}
+
+/* STICKERS */
+
+.sticker{
+  position:absolute;
+  font-size:44px;
+  user-select:none;
   pointer-events:none;
-  z-index:999999;
-  font-size:14px;
-  animation:fade .7s linear forwards;
+  animation:float 4s ease-in-out infinite alternate;
 }
 
-@keyframes fade{
-  to{
-    opacity:0;
-    transform:translateY(-20px) scale(.5);
-  }
+@keyframes float{
+  from{transform:translateY(0px) rotate(-5deg);}
+  to{transform:translateY(-12px) rotate(5deg);}
 }
 
-
+.s1{top:150px; right:80px;}
+.s2{top:500px; right:140px;}
+.s3{top:300px; right:30px;}
+.s4{top:800px; right:50px;}
 
 /* MOBILE */
 
-@media(max-width:768px){
+@media(max-width:900px){
 
-  body{
-    overflow:auto;
-  }
+.desktop{
+  padding:12px;
+}
 
-  .desktop{
-    min-height:1300px;
-    height:auto;
-    padding:12px;
-    padding-bottom:80px;
-  }
+.window{
+  position:relative !important;
+  width:100%;
+  top:auto !important;
+  left:auto !important;
+  margin-bottom:18px;
+}
 
-  .icon{
-    width:74px;
-    font-size:11px;
-  }
+h1{
+  font-size:54px;
+}
 
-  .window{
-    max-width:94vw;
-  }
-
-  #mirror{
-    left:10px;
-    top:95px;
-    width:94vw;
-  }
-
-  #cd{
-    left:10px;
-    top:590px;
-    width:94vw;
-  }
-
-  #note{
-    left:18px;
-    right:auto;
-    top:770px;
-    width:86vw;
-  }
-
-  #folder,
-  #paint,
-  #shop,
-  #popup{
-    left:10px;
-    top:120px;
-    width:94vw;
-  }
-
-  .hero-img{
-    height:240px;
-  }
-
-  .folder-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .paint-main{
-    overflow:auto;
-  }
-
-  .paint-canvas-wrap{
-    width:calc(94vw - 100px);
-  }
-
-  .paint-bottom{
-    overflow:auto;
-    align-items:flex-start;
-  }
-
-  .palette{
-    grid-template-columns:repeat(7,18px);
-  }
-
-  .task{
-    font-size:11px;
-    padding:5px 8px;
-  }
-
-  .cd-row{
-    grid-template-columns:1fr;
-    text-align:center;
-  }
-
-  .album-cover{
-    margin:0 auto;
-  }
+canvas{
+  height:300px;
+}
 
 }
 
@@ -550,214 +305,359 @@ canvas{
 
 <body>
 
+<div class="top-marquee">
+  <span>
+    MIRROR MIRROR ON THE WALL WHO'S THE PRETTIEST OF THEM ALL ✦
+    MIRROR MIRROR ON THE WALL WHO'S THE PRETTIEST OF THEM ALL ✦
+  </span>
+</div>
+
 <div class="desktop">
 
-  <div class="icon" onclick="openWin('folder')">
-    <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png">
-    open me!!!
-  </div>
+<!-- FLOATING STICKERS -->
 
-  <div class="icon" onclick="openWin('paint')">
-    <img src="https://win98icons.alexmeub.com/icons/png/paint_file-0.png">
-    draw here
-  </div>
+<div class="sticker s1">💋</div>
+<div class="sticker s2">✨</div>
+<div class="sticker s3">🪞</div>
+<div class="sticker s4">💖</div>
 
-  <div class="icon" onclick="openWin('shop')">
-    <img src="https://win98icons.alexmeub.com/icons/png/shopping_cart-0.png">
-    secret shop
-  </div>
+<!-- HERO -->
 
-  <div class="window pink" id="mirror">
-    <div class="titlebar">
-      mirror_final_FINAL2.exe
-      <span class="close">x</span>
-    </div>
+<section class="window hero draggable">
 
-    <div class="content">
+<div class="titlebar">
+<span>ms-paint-mirror.exe</span>
+<div class="buttons">
+<span>_</span>
+<span>□</span>
+<span>x</span>
+</div>
+</div>
 
-      <img class="hero-img" src="https://placehold.co/700x700/ffb7e9/111?text=UPLOAD+MIRROR+PHOTO+HERE">
+<div class="content">
 
-      <h1>MS Paint Mirror</h1>
+<h1>MS PAINT MIRROR</h1>
 
-      <p>
-        A shatterproof 40 × 60 cm mirror for desktop tumblr babes,
-        made with Pride flag colors at the bottom
-        and people who want their room to feel like a screenshot.
-        for Pride month, a % of each purchase will go towards The Okra project
-      </p>
+<h2>Paint yourself pretty.</h2>
 
-      <p class="blink">
-        made to order · customization available
-      </p>
+<p>
+A chaotic cute shatterproof mirror inspired by old internet culture,
+MS Paint, webcam selfies, Pride, and girls who turn getting ready
+into performance art.
+</p>
 
-      <div class="price">€45</div>
+<div class="price">€45</div>
 
-      <br>
+<p><b>40 × 60 cm</b></p>
 
-      <button onclick="window.location.href='https://buy.stripe.com/YOUR_MIRROR_LINK'">
-        buy the mirror
-      </button>
+<a class="cta" href="YOUR_STRIPE_LINK" target="_blank">
+BUY MIRROR
+</a>
 
-      <button onclick="openWin('paint')">
-        draw on the site
-      </button>
+</div>
+</section>
 
-    </div>
-  </div>
+<!-- DRAW APP -->
 
+<section class="window paint-window draggable">
 
+<div class="titlebar">
+<span>upload-your-face.exe</span>
+<div class="buttons">
+<span>🎨</span>
+<span>📸</span>
+<span>x</span>
+</div>
+</div>
 
-  <!-- NEW CD PLAYER -->
+<div class="content">
 
-  <div class="window purple" id="cd">
+<h2>Decorate yourself</h2>
 
-    <div class="titlebar">
-      FUNFUNFUN MIXES
-      <span class="close">x</span>
-    </div>
+<div class="tools">
 
-    <div class="content">
+<!-- PRIDE COLORS -->
 
-      <div class="cd-row">
+<button class="color-btn" style="background:#E40303" onclick="setColor('#E40303')"></button>
+<button class="color-btn" style="background:#FF8C00" onclick="setColor('#FF8C00')"></button>
+<button class="color-btn" style="background:#FFED00" onclick="setColor('#FFED00')"></button>
+<button class="color-btn" style="background:#008026" onclick="setColor('#008026')"></button>
+<button class="color-btn" style="background:#24408E" onclick="setColor('#24408E')"></button>
+<button class="color-btn" style="background:#732982" onclick="setColor('#732982')"></button>
 
-        <div class="album-cover">
+<button class="color-btn" style="background:#FFFFFF" onclick="setColor('#FFFFFF')"></button>
+<button class="color-btn" style="background:#FFAFC8" onclick="setColor('#FFAFC8')"></button>
+<button class="color-btn" style="background:#74D7EE" onclick="setColor('#74D7EE')"></button>
+<button class="color-btn" style="background:#613915" onclick="setColor('#613915')"></button>
+<button class="color-btn" style="background:#000000" onclick="setColor('#000000')"></button>
 
-          <div class="album-inner">
-
-            <div class="album-star">✦</div>
-
-            <div class="album-title">
-              LIL<br>
-              BUKKAKE<br>
-              FM
-            </div>
-
-          </div>
-
-        </div>
-
-        <div>
-
-          <div class="track">
-            Artist: Lil Bukkake
-          </div>
-
-          <div class="track" id="currentTrack">
-            Track: choose your fighter
-          </div>
-
-          <button onclick="openMix(https://soundcloud.com/lilbukkake/eargasms-fm-release-your-inhibitions','For the disco lovers')">
-            Mix 1
-          </button>
-
-          <button onclick="openMix('https://soundcloud.com/lilbukkake/regulate-your-nervous-system','Regulate Your Nervous System')">
-            Mix 2
-          </button>
-
-          <button onclick="openMix('https://soundcloud.com/lilbukkake/douched-and-dangerous','Douched and Dangerous')">
-            Mix 3
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="window orange" id="note">
-
-    <div class="titlebar">
-      sticky_note_do_not_delete.txt
-      <span class="close">x</span>
-    </div>
-
-    <div class="content" style="background:#fff2a8">
-
-      <div class="note-line">
-        □ this is not a normal mirror
-      </div>
-
-      <div class="note-line">
-        □ it is shatterproof
-      </div>
-
-      <div class="note-line">
-        □ 40 × 60 cm
-      </div>
-
-      <div class="note-line">
-        □ made to order in Lisbon
-      </div>
-
-      <div class="note-line">
-        □ custom text available
-      </div>
-
-      <div class="note-line">
-        □ follow me on IG @funfunfun.world
-      </div>
-
-    </div>
-
-  </div>
+<button class="tool-btn" onclick="setBrush(3)">Thin</button>
+<button class="tool-btn" onclick="setBrush(10)">Marker</button>
+<button class="tool-btn" onclick="setBrush(20)">Big</button>
+<button class="tool-btn" onclick="clearCanvas()">Clear</button>
 
 </div>
 
-<div class="taskbar">
+<div class="tools">
+<input type="file" id="uploadPhoto" accept="image/*">
+<button class="tool-btn" onclick="startCamera()">Use Webcam</button>
+<button class="tool-btn" onclick="saveImage()">Save Masterpiece</button>
+</div>
 
-  <button class="start" onclick="openWin('folder')">
-    Start
-  </button>
+<div class="canvas-wrap">
+<video id="video" autoplay playsinline style="display:none;width:100%;border:4px solid #000;"></video>
+<canvas id="paintCanvas"></canvas>
+</div>
 
-  <button class="task" onclick="openWin('mirror')">
-    Mirror
-  </button>
+</div>
+</section>
 
-  <button class="task" onclick="openWin('paint')">
-    Paint
-  </button>
+<!-- MUSIC -->
 
-  <button class="task" onclick="openWin('shop')">
-    Shop
-  </button>
+<section class="window music-window draggable music">
 
-  <div class="clock" id="clock"></div>
+<div class="titlebar">
+<span>cd-player.exe</span>
+<div class="buttons">
+<span>▶</span>
+<span>♫</span>
+<span>x</span>
+</div>
+</div>
+
+<div class="content">
+
+<div class="cd"></div>
+
+<h2>FUNFUNFUN.FM</h2>
+
+<p>Play a mix while you decorate your mirror selfie.</p>
+
+<iframe
+height="166"
+scrolling="no"
+allow="autoplay"
+src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/YOUR-SOUNDCLOUD/YOUR-MIX&color=%23ff32b1&auto_play=false">
+</iframe>
+
+</div>
+</section>
+
+<!-- PRODUCT PHOTOS -->
+
+<section class="window gallery-window draggable">
+
+<div class="titlebar">
+<span>mirror-gallery.bmp</span>
+<div class="buttons">
+<span>🪞</span>
+<span>★</span>
+<span>x</span>
+</div>
+</div>
+
+<div class="content">
+
+<h2>Product Photos</h2>
+
+<div class="gallery">
+<img src="mirror1.jpg">
+<img src="mirror2.jpg">
+<img src="mirror3.jpg">
+</div>
+
+</div>
+</section>
 
 </div>
 
 <script>
 
-function openWin(id){
-  const win=document.getElementById(id);
+/* =========================================
+DRAG WINDOWS
+========================================= */
 
-  if(win){
-    win.style.display="block";
-    win.style.zIndex=Date.now();
-  }
+document.querySelectorAll(".draggable").forEach(windowEl => {
+
+const titleBar = windowEl.querySelector(".titlebar");
+
+let offsetX = 0;
+let offsetY = 0;
+let isDragging = false;
+
+titleBar.addEventListener("mousedown", (e)=>{
+  isDragging = true;
+  offsetX = e.clientX - windowEl.offsetLeft;
+  offsetY = e.clientY - windowEl.offsetTop;
+});
+
+document.addEventListener("mousemove", (e)=>{
+  if(!isDragging) return;
+
+  windowEl.style.left = `${e.clientX - offsetX}px`;
+  windowEl.style.top = `${e.clientY - offsetY}px`;
+});
+
+document.addEventListener("mouseup", ()=>{
+  isDragging = false;
+});
+
+});
+
+/* =========================================
+DRAWING APP
+========================================= */
+
+const canvas = document.getElementById("paintCanvas");
+const ctx = canvas.getContext("2d");
+
+let drawing = false;
+let brushSize = 10;
+let currentColor = "#E40303";
+
+function resizeCanvas(){
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = 420;
+
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
 }
 
-openWin("mirror");
-openWin("cd");
-openWin("note");
+resizeCanvas();
 
-setInterval(()=>{
-  document.getElementById("clock").innerText=
-  new Date().toLocaleTimeString([],{
-    hour:"2-digit",
-    minute:"2-digit"
-  });
-},1000);
+window.addEventListener("resize", resizeCanvas);
 
-function openMix(url,title){
+function setColor(color){
+  currentColor = color;
+}
 
-  document.getElementById("currentTrack").innerText=
-  "Track: "+title;
+function setBrush(size){
+  brushSize = size;
+}
 
-  window.open(url,"_blank");
+function clearCanvas(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+
+function getPosition(e){
+
+const rect = canvas.getBoundingClientRect();
+
+if(e.touches){
+  return {
+    x:e.touches[0].clientX - rect.left,
+    y:e.touches[0].clientY - rect.top
+  };
+}
+
+return{
+  x:e.clientX - rect.left,
+  y:e.clientY - rect.top
+};
+
+}
+
+function startDrawing(e){
+  drawing = true;
+  draw(e);
+}
+
+function stopDrawing(){
+  drawing = false;
+  ctx.beginPath();
+}
+
+function draw(e){
+
+if(!drawing) return;
+
+e.preventDefault();
+
+const pos = getPosition(e);
+
+ctx.lineWidth = brushSize;
+ctx.lineCap = "round";
+ctx.strokeStyle = currentColor;
+
+ctx.lineTo(pos.x,pos.y);
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(pos.x,pos.y);
+
+}
+
+canvas.addEventListener("mousedown", startDrawing);
+canvas.addEventListener("mouseup", stopDrawing);
+canvas.addEventListener("mouseleave", stopDrawing);
+canvas.addEventListener("mousemove", draw);
+
+canvas.addEventListener("touchstart", startDrawing);
+canvas.addEventListener("touchend", stopDrawing);
+canvas.addEventListener("touchmove", draw);
+
+/* =========================================
+UPLOAD IMAGE
+========================================= */
+
+document.getElementById("uploadPhoto").addEventListener("change", function(e){
+
+const file = e.target.files[0];
+
+if(!file) return;
+
+const img = new Image();
+
+img.onload = function(){
+
+ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+}
+
+img.src = URL.createObjectURL(file);
+
+});
+
+/* =========================================
+WEBCAM
+========================================= */
+
+async function startCamera(){
+
+const video = document.getElementById("video");
+
+video.style.display = "block";
+
+const stream = await navigator.mediaDevices.getUserMedia({
+  video:true
+});
+
+video.srcObject = stream;
+
+setTimeout(()=>{
+
+ctx.drawImage(video,0,0,canvas.width,canvas.height);
+
+video.style.display = "none";
+
+},3000);
+
+}
+
+/* =========================================
+SAVE IMAGE
+========================================= */
+
+function saveImage(){
+
+const link = document.createElement("a");
+
+link.download = "funfunfun-masterpiece.png";
+link.href = canvas.toDataURL();
+
+link.click();
+
 }
 
 </script>
