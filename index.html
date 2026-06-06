@@ -1111,7 +1111,8 @@ function draw(e) {
 function stopDraw(e) {
   if (!drawing) return;
   drawing = false;
-
+ctx.beginPath();
+  
   const pos = e ? getPos(e.changedTouches ? e.changedTouches[0] : e) : { x: startX, y: startY };
   const w = pos.x - startX;
   const h = pos.y - startY;
@@ -1149,13 +1150,13 @@ function stopDraw(e) {
 
 canvas.addEventListener("mousedown", startDraw);
 canvas.addEventListener("mousemove", draw);
-canvas.addEventListener("mouseup", stopDraw);
-canvas.addEventListener("mouseleave", stopDraw);
+
+document.addEventListener("mouseup", stopDraw);
 
 canvas.addEventListener("touchstart", startDraw, { passive: false });
 canvas.addEventListener("touchmove", draw, { passive: false });
-canvas.addEventListener("touchend", stopDraw);
 
+document.addEventListener("touchend", stopDraw);
 function clearCanvas() {
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
