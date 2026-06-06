@@ -546,7 +546,51 @@ canvas {
   font-size: 58px;
   filter: drop-shadow(2px 2px 0 #111);
 }
+.minesweeper-window {
+  top: 340px;
+  left: 700px;
+  width: 310px;
+}
 
+.minesweeper-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #c0c0c0;
+  border: 2px inset white;
+  padding: 6px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.minesweeper-board {
+  display: grid;
+  grid-template-columns: repeat(6, 38px);
+  gap: 3px;
+  justify-content: center;
+}
+
+.mine-cell {
+  width: 38px;
+  height: 38px;
+  background: #c0c0c0;
+  border: 3px outset white;
+  font-size: 18px;
+  font-weight: bold;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.mine-cell.revealed {
+  border: 2px inset white;
+  background: #f4f4f4;
+}
+
+.mine-cell.bad {
+  background: #ff66cc;
+}
 .clippy {
   position: fixed;
   right: 24px;
@@ -704,6 +748,10 @@ canvas {
   <div class="desktop-icon" onclick="openWindow('folderWin')"><div class="icon-img">📁</div><div class="label">Shop Files</div></div>
   <div class="desktop-icon" onclick="openWindow('shippingWin')"><div class="icon-img">📦</div><div class="label">Shipping</div></div>
   <div class="desktop-icon" onclick="openWindow('cdWin')"><div class="icon-img">💿</div><div class="label">CD Player</div></div>
+  <div class="desktop-icon" onclick="openWindow('minesweeperWin')">
+  <div class="icon-img">💣</div>
+  <div class="label">minesweeper.exe</div>
+</div>
   <div class="desktop-icon" onclick="window.open('https://www.instagram.com/funfunfun.world/', '_blank')"><div class="icon-img">🤠</div> <div class="label">MySpace</div>
 </div>
 </div>
@@ -753,7 +801,29 @@ canvas {
     </div>
   </div>
 </section>
+<section class="window minesweeper-window hidden" id="minesweeperWin">
+  <div class="window-titlebar">
+    <span>minesweeper_but_make_it_queer.exe</span>
+    <div class="window-buttons">
+      <button class="win-btn" onclick="minimizeWindow(event, 'minesweeperWin')">_</button>
+      <button class="win-btn">□</button>
+      <button class="win-btn" onclick="closeWindow(event, 'minesweeperWin')">×</button>
+    </div>
+  </div>
 
+  <div class="window-menu">
+    <span>Game</span><span>Glitter</span><span>Help</span>
+  </div>
+
+  <div class="window-content">
+    <div class="minesweeper-top">
+      <span id="mineStatus">avoid bad vibes</span>
+      <button class="tiny-btn" onclick="startMinesweeper()">reset</button>
+    </div>
+
+    <div id="minesweeperBoard" class="minesweeper-board"></div>
+  </div>
+</section>
 <section class="window mirror-window" id="mirrorWin">
   <div class="window-titlebar">
     <span>the-coolest-object.exe</span>
@@ -895,6 +965,7 @@ For the OG internet Tumblr babes. Each mirror is made-to-order in Lisbon using l
     <div class="start-menu-item" onclick="openWindow('cdWin')">💿 CD Player</div>
     <div class="start-menu-item" onclick="openWindow('donationWin')">💚 Donation Info</div>
     <div class="start-menu-item" onclick="openWindow('shippingWin')">📦 Shipping</div>
+    <div class="start-menu-item" onclick="openWindow('minesweeperWin')">💣 Minesweeper</div>
   </div>
 </div>
 
@@ -1243,6 +1314,63 @@ document.getElementById("photoUpload").addEventListener("change", e => {
   };
   reader.readAsDataURL(file);
 });
+  const mineSymbols = ["💅", "✨", "🪞", "💖", "🌈", "💿", "👼", "🦋"];
+const badSymbols = ["🚩", "👎", "🧍‍♂️", "💀"];
+let mineGameOver = false;
+
+function startMinesweeper() {
+  const board = document.getElementById("minesweeperBoard");
+  const status = document.getElementById("mineStatus");
+
+  board.innerHTML = "";
+  status.textContent = "avoid bad vibes";
+  mineGameOver = false;
+
+  const totalCells = 36;
+  const badCells = new Set();
+
+  while (badCells.size < 6) {
+    badCells.add(Math.floor(Math.random() * totalCells));
+  }
+
+  for (let i = 0; i < totalCells; i++) {
+    const cell = document.createElement("button");
+    cell.className = "mine-cell";
+
+    const isBad = badCells.has(i);
+
+    cell.onclick = () => {
+      if (mineGameOver || cell.classList.contains("revealed")) return;
+
+      cell.classList.add("revealed");
+
+      if (isBad) {
+        cell.classList.add("bad");
+        cell.textContent = badSymbols[Math.floor(Math.random() * badSymbols.length)];
+        status.textContent = "ERROR: bad vibes detected";
+        mineGameOver = true;
+        revealAllBadCells();
+      } else {
+        cell.textContent = mineSymbols[Math.floor(Math.random() * mineSymbols.length)];
+        status.textContent = "safe. still iconic.";
+      }
+    };
+
+    cell.dataset.bad = isBad;
+    board.appendChild(cell);
+  }
+}
+
+function revealAllBadCells() {
+  document.querySelectorAll(".mine-cell").forEach(cell => {
+    if (cell.dataset.bad === "true") {
+      cell.classList.add("revealed", "bad");
+      cell.textContent = badSymbols[Math.floor(Math.random() * badSymbols.length)];
+    }
+  });
+}
+
+startMinesweeper();
 </script>
 
 </body>
