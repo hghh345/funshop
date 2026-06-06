@@ -547,9 +547,11 @@ canvas {
   filter: drop-shadow(2px 2px 0 #111);
 }
 .minesweeper-window {
-  top: 340px;
-  left: 700px;
+  top: 120px;
+  right: 40px;
   width: 310px;
+  z-index: 95;
+  transform: rotate(1deg);
 }
 
 .minesweeper-top {
@@ -803,7 +805,7 @@ canvas {
 </section>
 <section class="window minesweeper-window hidden" id="minesweeperWin">
   <div class="window-titlebar">
-    <span>minesweeper_but_make_it_queer.exe</span>
+    <span>minesweeper_but_make_it_fab.exe</span>
     <div class="window-buttons">
       <button class="win-btn" onclick="minimizeWindow(event, 'minesweeperWin')">_</button>
       <button class="win-btn">□</button>
