@@ -986,7 +986,27 @@ function playSong() {
   if (song.paused) song.play();
   else song.pause();
 }
+  const mirrorPhotos = [
+  "mirror1.JPG",
+  "mirror2.JPG",
+  "mirror3.JPG"
+];
 
+let currentMirrorPhoto = 0;
+
+function changeMirrorPhoto(direction) {
+  currentMirrorPhoto += direction;
+
+  if (currentMirrorPhoto < 0) {
+    currentMirrorPhoto = mirrorPhotos.length - 1;
+  }
+
+  if (currentMirrorPhoto >= mirrorPhotos.length) {
+    currentMirrorPhoto = 0;
+  }
+
+  document.getElementById("mirrorPhoto").src = mirrorPhotos[currentMirrorPhoto];
+}
 const canvas = document.getElementById("paintCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -1095,27 +1115,7 @@ function stopDraw(e) {
   ctx.strokeStyle = currentColor;
   ctx.fillStyle = currentColor;
   ctx.lineWidth = brushSize;
-  const mirrorPhotos = [
-  "mirror1.JPG",
-  "mirror2.JPG",
-  "mirror3.JPG"
-];
 
-let currentMirrorPhoto = 0;
-
-function changeMirrorPhoto(direction) {
-  currentMirrorPhoto += direction;
-
-  if (currentMirrorPhoto < 0) {
-    currentMirrorPhoto = mirrorPhotos.length - 1;
-  }
-
-  if (currentMirrorPhoto >= mirrorPhotos.length) {
-    currentMirrorPhoto = 0;
-  }
-
-  document.getElementById("mirrorPhoto").src = mirrorPhotos[currentMirrorPhoto];
-}
 
   if (currentTool === "line") {
     ctx.beginPath();
