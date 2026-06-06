@@ -245,10 +245,9 @@ canvas {
   top: 55px;
   left: 58%;
   transform: translateX(-50%);
-  width: 330px;
+  width: 500px;
   z-index: 120;
 }
-
 .mirror-card {
   background: white;
   border: 2px inset #aaa;
@@ -257,8 +256,8 @@ canvas {
 }
 
 .mirror-photo-wrap {
-  width: 220px;
-  height: 290px;
+  width: 280px;
+  height: 3600px;
   margin: 0 auto 12px;
   border: 10px ridge #dcdcdc;
   border-radius: 18px 18px 55px 55px;
@@ -306,6 +305,38 @@ canvas {
   border: 2px outset white;
   z-index: 5;
   white-space: nowrap;
+}
+  .mirror-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.mirror-option {
+  background: #f8f8f8;
+  border: 2px inset #aaa;
+  padding: 10px;
+  text-align: center;
+}
+
+.mirror-option h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+
+.mirror-option p {
+  margin: 0 0 6px;
+  font-size: 12px;
+}
+
+.mirror-option.featured {
+  background: #fff4fb;
+  box-shadow: inset 0 0 0 2px #ff66cc;
+}
+
+.mirror-option .price {
+  font-size: 22px;
 }
 
 .gallery-btn {
@@ -743,11 +774,21 @@ canvas {
       <h1 style="font-size:20px;margin:5px 0;">MS Paint Mirror</h1>
       <p style="font-size:13px;">
 For the OG internet Tumblr babes. Each mirror is made-to-order in Lisbon using lightweight shatterproof acrylic. ✦ Dimensions: 40cm × 60cm  ✦ Easy to hang, comes with sticky backing ✦ For Pride Month, a portion of proceeds will be donated to For the Gworls.  </p>
+    <div class="mirror-options">
+  <div class="mirror-option">
+    <h3>Mini Mirror</h3>
+    <p>30cm × 40cm</p>
+    <div class="price">€35</div>
+    <a class="buy-btn" href="https://buy.stripe.com/14AdR8deY4vD0o428M5gc0e" target="_blank">BUY MINI</a>
+  </div>
+        <div class="mirror-option featured">
+    <h3>Main Mirror</h3>
+    <p>40cm × 60cm</p>
       <div class="price">€55</div>
-      <p style="font-size:12px;margin:4px 0;">+ €10 optional customization</p>
       <a class="buy-btn" href="https://buy.stripe.com/fZu28q1wgbY59YEdRu5gc0d" target="_blank">BUY </a>
     </div>
   </div>
+      <p style="font-size:12px;margin:8px 0 0;">+ €10 optional customization</p>
 </section>
 
 <section class="window cd-window" id="cdWin">
