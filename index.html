@@ -728,6 +728,49 @@ canvas {
 
   .task-pill { display: none; }
 }
+  <style>
+.cart-window {
+  width: 280px;
+  background: #c0c0c0;
+  border: 2px solid #000;
+  position: fixed;
+  top: 100px;
+  right: 50px;
+  font-family: Arial, sans-serif;
+  display: none;
+  box-shadow: 4px 4px 0 #000;
+  z-index: 9999;
+}
+
+.cart-titlebar {
+  background: #000080;
+  color: white;
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  cursor: move;
+  font-size: 12px;
+}
+
+.cart-titlebar button {
+  background: #c0c0c0;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.cart-content {
+  padding: 10px;
+  font-size: 13px;
+}
+
+.cart-content button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 6px;
+  border: 1px solid #000;
+  background: #e0e0e0;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -1372,7 +1415,59 @@ function revealAllBadCells() {
 }
 
 startMinesweeper();
+  <script>
+let cart = [
+  { name: "MS Paint Mirror", price: 35 }
+];
+
+function openCart() {
+  document.getElementById("cart-window").style.display = "block";
+  renderCart();
+}
+
+function closeCart() {
+  document.getElementById("cart-window").style.display = "none";
+}
+
+function renderCart() {
+  let list = document.getElementById("cart-items");
+  let total = 0;
+
+  list.innerHTML = "";
+
+  cart.forEach(item => {
+    total += item.price;
+    let li = document.createElement("li");
+    li.textContent = `${item.name} — €${item.price}`;
+    list.appendChild(li);
+  });
+
+  document.getElementById("cart-total").textContent = "Total: €" + total;
+}
+
+function checkout() {
+  alert("This will connect to PayPal next step");
+}
 </script>
+    <div id="cart-window" class="cart-window">
+  <div class="cart-titlebar" id="cart-drag">
+    <span>shopping_cart.exe</span>
+    <button onclick="closeCart()">✕</button>
+  </div>
+
+  <div class="cart-content">
+    <p><strong>Your Cart</strong></p>
+
+    <ul id="cart-items">
+      <li>MS Paint Mirror — €35</li>
+    </ul>
+
+    <p id="cart-total">Total: €35</p>
+
+    <button onclick="checkout()">Checkout with PayPal</button>
+    <button onclick="openCart()">Open Cart</button>
+  </div>
+</div>
 
 </body>
 </html>
